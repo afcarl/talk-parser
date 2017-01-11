@@ -75,10 +75,14 @@ object TalkParser {
     val units = getUnitRelations(bnfRules)
 
     val dpArray = parseByCyk4Bnf(refinedStr, bnfRules, units)
-    val cell = dpArray(dpArray.length - 1)(0)
-    cell.nodes.map { n =>
-      Node.flatten(n)
-      n
+    if(dpArray.length > 0) {
+      val cell = dpArray(dpArray.length - 1)(0)
+      cell.nodes.map { n =>
+        Node.flatten(n)
+        n
+      }
+    } else {
+      ArrayBuffer[Node]()
     }
   }
 
